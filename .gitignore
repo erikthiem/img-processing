@@ -90,3 +90,6 @@ ENV/
 
 # Swap files
 *.swp
+
+# Uploaded files
+uploads/*
