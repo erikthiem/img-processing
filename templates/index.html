@@ -1,7 +1,7 @@
 <!doctype html>
 <head>
     <title>img-processing</title>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
 </head>
     <body>
         <div class="wrapper">
@@ -9,17 +9,29 @@
                 <h1>img-processing</h1>
             </div>
 
-            <div class="mainContent">
-                <form id="upload_form" enctype="multipart/form-data" method="post" action="/upload">
-                    <label for="image_file">Please select an image file:</label>
-                    <input type="file" name="image_file" id="image_file"/> 
-                    <input type="submit" value="Upload" />
+            <div class="main-content">
+                <form id="upload-form" enctype="multipart/form-data" method="post" action="/upload">
+                    <label for="image-file">Please select an image file:</label>
+                    <input type="file" name="image-file" id="image-file"/> 
+                    <input type="submit" id="upload-button" value="Upload"/>
                 </form>
+
+                <div class="image-box">
+                    <img id="uploaded-image" src=""/> 
+                </div>
             </div>
 
             <div class="footer">
                 <h1>By <a href="http://www.erikthiem.com" target="_blank">Erik Thiem</a>. Source code on <a href="https://github.com/erikthiem/img-processing" target="_blank">Github</a>.</h1>
             </div>
         </div>
+
+    <!-- JAVASCRIPT START -->
+
+	    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/image.js') }}"></script>
+    
+    <!-- JAVASCRIPT END -->
+
     </body>
 </html>

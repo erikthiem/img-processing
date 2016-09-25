@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, url_for, send_from_directory,
 from werkzeug import secure_filename
 
 UPLOAD_FOLDER = "/tmp"
-ALLOWED_EXTENSIONS = set(['jpg'])
+ALLOWED_EXTENSIONS = set(['jpg', 'png'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -19,24 +19,24 @@ def allowed_file(filename):
 
 @app.route("/upload", methods=["POST"])
 def upload():
-    # If there is no image_file param
-    if "image_file" not in request.files:
-        return "", 400
+    # If there is no image-file param
+    if "image-file" not in request.files:
+        return "Wrong params", 408
 
-    file = request.files["image_file"]
+    file = request.files["image-file"]
 
-    # If the image_file param is empty
+    # If the image-file param is empty
     if file.filename == "":
-        return "", 400
+        return "Image param empty", 409
 
     # Check that the file has an allowed extension
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        return redirect(url_for("uploaded_file", filename=filename))
+        return url_for("uploaded_file", filename=filename)
 
     else:
-        return "", 400
+        return "Invalid file", 400
 
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
